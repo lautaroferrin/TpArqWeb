@@ -2,7 +2,7 @@
 
 ### Para llevar a cabo el trabajo práctico la idea que se me ocurrió fue realizar un sistema de socios de un club, apuntado a la parte administrativa del club.
 
-#### En este sistemá se podrá dar de alta/baja: 
+#### En este sistema se podrá dar de alta/baja: 
 
 - socios
 - profesores
