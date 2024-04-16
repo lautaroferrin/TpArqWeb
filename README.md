@@ -11,7 +11,7 @@ Alumno Lautaro Ferrin, legajo 0124643. Estoy cursando la materia Arquitectura We
 
 - socios (int nroSocio, Str nombre, Str apellido)
 - profesores (int legajo, Str nombre, Str apellido)
-- deportes (int idDeporte, Str descripcion)
+- deportes (int idDeporte, Str descripcion, Profesor profesor)
 - profesores de deportes
 
 ### Funciones:
@@ -61,3 +61,16 @@ PUT/socio/{nroSocio}
 El **método para borrar** un socio sería un simple delete ubicando al socio por su número de socio:
 
 DELETE/socio/{nroSocio}
+
+---
+
+**Asignar profesor a deporte**
+Al realizar esta función tengo dudas pero se me ocurrio hacer un put en deportes, y que estos tengan un atributo del tipo profesor que sea quien los dé. Por lo que podría ser algo así:
+
+PUT/deporte/idDeporte/profesor/idProfesor
+
+Por ejemplo:
+
+PUT/deporte/1/profesor/123
+
+Asignará al deporte id=1 el profesor legajo=123.
