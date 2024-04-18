@@ -18,7 +18,7 @@ Alumno Lautaro Ferrin, legajo 0124643. Estoy cursando la materia Arquitectura We
 
 Habrá funciones getSocios(), getProfesores(), getDeportes(), las cuales retornarán arrays del respectivo dato que se este solicitando.
 
-También existirá una función asignarProfesorADeporte(Profesor profesor, Deporte deporte) que como bien su nombre indica permitirá asignar un profesor al deporte que éste enseñe.
+También existirá una función asignarProfesorADeporte(Profesor profesor, Deporte deporte) que como bien su nombre indica permitirá asignar un profesor al deporte que éste enseñe y otra que permitira a los socios inscribirse a los deportes: inscribirseADeporte(Socio socio Deporte deporte).
 
 ### CRUDs:
 
@@ -52,8 +52,8 @@ PUT/socio/{nroSocio}
 
 {
   "nroSocio":123,
-  "nombre":"Lautaro",
-  "apellido":"Ferrin"
+  "nombre":"Diego",
+  "apellido":"Marafetti"
 }
 
 ---
@@ -61,6 +61,86 @@ PUT/socio/{nroSocio}
 El **método para borrar** un socio sería un simple delete ubicando al socio por su número de socio:
 
 DELETE/socio/{nroSocio}
+
+---
+
+#### CRUD de Profesor:
+
+---
+
+El **método post** para dar de alta un profesor va a contener los datos del mismo (los datos son a modo de ejemplo):
+
+POST/profesor/create
+
+{
+  "legajo":123,
+  "nombre":"Juan",
+  "apellido":"Perez"
+}
+
+---
+
+El **método read** se va a realizar mediante el get, por el cuál vamos a obtener los datos del profesor ubicandolo gracias a su legajo.
+
+GET/profesor/{legajo}
+
+---
+
+El **método put** para actualizar un profesor sería similar:
+
+PUT/profesor/{legajo}
+
+{
+  "legajo":123,
+  "nombre":"Pepe",
+  "apellido":"Martinez"
+}
+
+---
+
+El **método para borrar** un profesor sería un simple delete ubicando al mismo por su número de legajo:
+
+DELETE/profesor/{legajo}
+
+---
+
+#### CRUD de Deporte: int idDeporte, Str descripcion, Profesor profesor
+
+---
+
+El **método post** para dar de alta un deporte va a contener los datos del mismo (los datos son a modo de ejemplo):
+
+POST/deporte/create
+
+{
+  "idDeporte":1,
+  "descripcion":"Futbol",
+  profesor:123
+}
+
+---
+
+El **método read** se va a realizar mediante el get, por el cuál vamos a obtener los datos del deporte ubicandolo gracias a su idDeporte.
+
+GET/deporte/{idDeporte}
+
+---
+
+El **método put** para actualizar un deporte sería similar:
+
+PUT/deporte/{idDeporte}
+
+{
+  "idDeporte":1,
+  "descripcion":"Rugby",
+  profesor:456
+}
+
+---
+
+El **método para borrar** un deporte sería un simple delete ubicando al mismo por su idDeporte:
+
+DELETE/deporte/{idDeporte}
 
 ---
 
@@ -74,3 +154,14 @@ Por ejemplo:
 PUT/deporte/1/profesor/123
 
 Asignará al deporte id=1 el profesor legajo=123.
+
+---
+
+**Asignar socio a deporte**
+Tambien tengo dudas pero intente hacerla lo mas similar posible a la de asignarProfesorADeporte:
+
+PUT/socio/nroSocio/deporte/idDeporte
+
+Por ejemplo:
+
+PUT/socio/123/deporte/1
