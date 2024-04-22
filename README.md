@@ -145,13 +145,13 @@ DELETE/deporte/{idDeporte}
 ---
 
 **Asignar profesor a deporte**
-Al realizar esta función tengo dudas pero se me ocurrio hacer un put en deportes, y que estos tengan un atributo del tipo profesor que sea quien los dé. Por lo que podría ser algo así:
+Al realizar esta función tengo dudas pero se me ocurrio hacer un post en deportes, y que estos tengan un atributo del tipo profesor que sea quien los dé. Por lo que podría ser algo así:
 
-PUT/deporte/idDeporte/profesor/idProfesor
+POST/deporte/idDeporte/profesor/idProfesor
 
 Por ejemplo:
 
-PUT/deporte/1/profesor/123
+POST/deporte/1/profesor/123
 
 Asignará al deporte id=1 el profesor legajo=123.
 
@@ -160,8 +160,8 @@ Asignará al deporte id=1 el profesor legajo=123.
 **Asignar socio a deporte**
 Tambien tengo dudas pero intente hacerla lo mas similar posible a la de asignarProfesorADeporte:
 
-PUT/socio/nroSocio/deporte/idDeporte
+POST/socio/nroSocio/deporte/idDeporte
 
 Por ejemplo:
 
-PUT/socio/123/deporte/1
+POST/socio/123/deporte/1
