@@ -30,7 +30,7 @@ De cada una de las clases mencionadas anteriormente **(socio, profesor y deporte
 
 El **método post** para dar de alta un socio va a contener los datos del mismo (los datos son a modo de ejemplo):
 
-POST/socio/create
+POST/socio
 
 {
   "nroSocio":123,
@@ -70,7 +70,7 @@ DELETE/socio/{nroSocio}
 
 El **método post** para dar de alta un profesor va a contener los datos del mismo (los datos son a modo de ejemplo):
 
-POST/profesor/create
+POST/profesor
 
 {
   "legajo":123,
@@ -110,7 +110,7 @@ DELETE/profesor/{legajo}
 
 El **método post** para dar de alta un deporte va a contener los datos del mismo (los datos son a modo de ejemplo):
 
-POST/deporte/create
+POST/deporte
 
 {
   "idDeporte":1,
