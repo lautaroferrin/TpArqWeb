@@ -28,12 +28,11 @@ De cada una de las clases mencionadas anteriormente **(socio, profesor y deporte
 
 ---
 
-El **método post** para dar de alta un socio va a contener los datos del mismo (los datos son a modo de ejemplo):
+El **método post** para dar de alta un socio va a contener los datos del mismo (los datos son a modo de ejemplo). El nroSocio no lo pasaremos aqui ya que es autoincremental:
 
-POST/socio
+POST/socios
 
 {
-  "nroSocio":123,
   "nombre":"Lautaro",
   "apellido":"Ferrin"
 }
@@ -42,16 +41,15 @@ POST/socio
 
 El **método read** se va a realizar mediante el get, por el cuál vamos a obtener los datos del socio ubicandolo gracias a su nroSocio.
 
-GET/socio/{nroSocio}
+GET/socios/nroSocio
 
 ---
 
 El **método put** para actualizar un socio sería similar:
 
-PUT/socio/{nroSocio}
+PUT/socios/nroSocio
 
 {
-  "nroSocio":123,
   "nombre":"Diego",
   "apellido":"Marafetti"
 }
@@ -60,7 +58,7 @@ PUT/socio/{nroSocio}
 
 El **método para borrar** un socio sería un simple delete ubicando al socio por su número de socio:
 
-DELETE/socio/{nroSocio}
+DELETE/socios/nroSocio
 
 ---
 
@@ -68,12 +66,11 @@ DELETE/socio/{nroSocio}
 
 ---
 
-El **método post** para dar de alta un profesor va a contener los datos del mismo (los datos son a modo de ejemplo):
+El **método post** para dar de alta un profesor va a contener los datos del mismo (los datos son a modo de ejemplo), el legajo es autoincremental:
 
-POST/profesor
+POST/profesores
 
 {
-  "legajo":123,
   "nombre":"Juan",
   "apellido":"Perez"
 }
@@ -82,16 +79,15 @@ POST/profesor
 
 El **método read** se va a realizar mediante el get, por el cuál vamos a obtener los datos del profesor ubicandolo gracias a su legajo.
 
-GET/profesor/{legajo}
+GET/profesores/legajo
 
 ---
 
 El **método put** para actualizar un profesor sería similar:
 
-PUT/profesor/{legajo}
+PUT/profesores/legajo
 
 {
-  "legajo":123,
   "nombre":"Pepe",
   "apellido":"Martinez"
 }
@@ -100,20 +96,19 @@ PUT/profesor/{legajo}
 
 El **método para borrar** un profesor sería un simple delete ubicando al mismo por su número de legajo:
 
-DELETE/profesor/{legajo}
+DELETE/profesores/legajo
 
 ---
 
-#### CRUD de Deporte: int idDeporte, Str descripcion, Profesor profesor
+#### CRUD de Deporte:
 
 ---
 
-El **método post** para dar de alta un deporte va a contener los datos del mismo (los datos son a modo de ejemplo):
+El **método post** para dar de alta un deporte va a contener los datos del mismo (los datos son a modo de ejemplo), el idDeporte es autoincremental:
 
-POST/deporte
+POST/deportes
 
 {
-  "idDeporte":1,
   "descripcion":"Futbol",
   profesor:123
 }
@@ -122,16 +117,15 @@ POST/deporte
 
 El **método read** se va a realizar mediante el get, por el cuál vamos a obtener los datos del deporte ubicandolo gracias a su idDeporte.
 
-GET/deporte/{idDeporte}
+GET/deportes/idDeporte
 
 ---
 
 El **método put** para actualizar un deporte sería similar:
 
-PUT/deporte/{idDeporte}
+PUT/deportes/idDeporte
 
 {
-  "idDeporte":1,
   "descripcion":"Rugby",
   profesor:456
 }
@@ -140,28 +134,31 @@ PUT/deporte/{idDeporte}
 
 El **método para borrar** un deporte sería un simple delete ubicando al mismo por su idDeporte:
 
-DELETE/deporte/{idDeporte}
+DELETE/deportes/idDeporte
 
 ---
 
 **Asignar profesor a deporte**
-Al realizar esta función tengo dudas pero se me ocurrio hacer un post en deportes, y que estos tengan un atributo del tipo profesor que sea quien los dé. Por lo que podría ser algo así:
+Para realizar esta funcion hago un put en deportes para permitir que los deportes puedan en un principio crearse sin profesores asignados y luego al ir a este endpoint, actuaria similar al put de deportes para actualizarlo y permitir asignar un profesor. Seria así:
 
-POST/deporte/idDeporte/profesor/idProfesor
+POST/profesoresDeportes/:idDeporte
 
 Por ejemplo:
 
-POST/deporte/1/profesor/123
-
-Asignará al deporte id=1 el profesor legajo=123.
+POST/profesoresDeportes/1
+{
+  "descripcion": "Prueba",
+  "profesor":"Diego Marafetti"
+}
 
 ---
 
 **Asignar socio a deporte**
-Tambien tengo dudas pero intente hacerla lo mas similar posible a la de asignarProfesorADeporte:
+La hice similar a profesoresDeportes pero con socios a deportes. Por lo que quedaria de la siguiente forma:
 
-POST/socio/nroSocio/deporte/idDeporte
-
-Por ejemplo:
-
-POST/socio/123/deporte/1
+POST/sociosDeportes/:idDeporte
+{
+  "descripcion":"Futbol",
+  "profesor":"Diego Marafetti",
+  "socio":"Lautaro Ferrin"
+}
