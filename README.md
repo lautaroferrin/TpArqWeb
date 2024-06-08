@@ -41,13 +41,17 @@ POST/socios
 
 El **método read** se va a realizar mediante el get, por el cuál vamos a obtener los datos del socio ubicandolo gracias a su nroSocio.
 
-GET/socios/nroSocio
+GET/socios/:nroSocio
+
+Tambien podran verse todos los socios con el siguiente endpoint:
+
+GET/socios
 
 ---
 
 El **método put** para actualizar un socio sería similar:
 
-PUT/socios/nroSocio
+PUT/socios/:nroSocio
 
 {
   "nombre":"Diego",
@@ -58,7 +62,7 @@ PUT/socios/nroSocio
 
 El **método para borrar** un socio sería un simple delete ubicando al socio por su número de socio:
 
-DELETE/socios/nroSocio
+DELETE/socios/:nroSocio
 
 ---
 
@@ -79,13 +83,17 @@ POST/profesores
 
 El **método read** se va a realizar mediante el get, por el cuál vamos a obtener los datos del profesor ubicandolo gracias a su legajo.
 
-GET/profesores/legajo
+GET/profesores/:legajo
+
+Tambien podran verse todos los socios con el siguiente endpoint:
+
+GET/profesores
 
 ---
 
 El **método put** para actualizar un profesor sería similar:
 
-PUT/profesores/legajo
+PUT/profesores/:legajo
 
 {
   "nombre":"Pepe",
@@ -96,7 +104,7 @@ PUT/profesores/legajo
 
 El **método para borrar** un profesor sería un simple delete ubicando al mismo por su número de legajo:
 
-DELETE/profesores/legajo
+DELETE/profesores/:legajo
 
 ---
 
@@ -104,61 +112,84 @@ DELETE/profesores/legajo
 
 ---
 
-El **método post** para dar de alta un deporte va a contener los datos del mismo (los datos son a modo de ejemplo), el idDeporte es autoincremental:
+El **método post** para dar de alta un deporte va a contener los datos del mismo (los datos son a modo de ejemplo), el idDeporte es autoincremental. No le asignamos profesor ya que con otro endpoint que veremos posteriormente se realizara esa accion. Tendra dos arrays, una de socios y otra de profesores que al inicializar el deporte se asignaran vacias pero luego podran llenarse mediante otros endpoints:
 
 POST/deportes
 
 {
   "descripcion":"Futbol",
-  profesor:123
 }
 
 ---
 
 El **método read** se va a realizar mediante el get, por el cuál vamos a obtener los datos del deporte ubicandolo gracias a su idDeporte.
 
-GET/deportes/idDeporte
+GET/deportes/:idDeporte
+
+Tambien podran verse todos los socios con el siguiente endpoint:
+
+GET/deportes
 
 ---
 
 El **método put** para actualizar un deporte sería similar:
 
-PUT/deportes/idDeporte
+PUT/deportes/:idDeporte
 
 {
-  "descripcion":"Rugby",
-  profesor:456
+  "descripcion":"Rugby"
 }
 
 ---
 
 El **método para borrar** un deporte sería un simple delete ubicando al mismo por su idDeporte:
 
-DELETE/deportes/idDeporte
+DELETE/deportes/:idDeporte
 
 ---
 
 **Asignar profesor a deporte**
-Para realizar esta funcion hago un put en deportes para permitir que los deportes puedan en un principio crearse sin profesores asignados y luego al ir a este endpoint, actuaria similar al put de deportes para actualizarlo y permitir asignar un profesor. Seria así:
+Para realizar esta funcion hago un put con un path que permita ingresar el idDeporte y el legajo del profesor. Seria así:
 
-POST/profesoresDeportes/:idDeporte
+POST/profesoresDeportes/:idDeporte/:legajo
 
 Por ejemplo:
 
-POST/profesoresDeportes/1
-{
-  "descripcion": "Prueba",
-  "profesor":"Diego Marafetti"
-}
+POST/profesoresDeportes/1/1
+
+En ese caso asigne al deporte con idDeporte=1 el profesor con legajo=1
 
 ---
 
 **Asignar socio a deporte**
 La hice similar a profesoresDeportes pero con socios a deportes. Por lo que quedaria de la siguiente forma:
 
-POST/sociosDeportes/:idDeporte
-{
-  "descripcion":"Futbol",
-  "profesor":"Diego Marafetti",
-  "socio":"Lautaro Ferrin"
-}
+POST/sociosDeportes/:idDeporte/:nroSocio
+
+En ese caso asigne al deporte con idDeporte=1 el socio con nroSocio=1
+
+---
+
+**Obtener los socios de un deporte por idDeporte**
+Para realizar esta funcion hago un get a /deportes en el que le pasaremos por parametro el idDeporte y los socios. Seria asi:
+
+GET/deportes/:idDeporte/socios
+
+Por ejemplo:
+
+GET/deportes/1/socios
+
+En ese caso estaria obteniendo los socios del deporte con idDeporte=1
+
+---
+
+**Obtener los profesores de un deporte por idDeporte**
+Para realizar esta funcion hago un get a /deportes en el que le pasaremos por parametro el idDeporte y los profesores. Seria asi:
+
+GET/deportes/:idDeporte/profesores
+
+Por ejemplo:
+
+GET/deportes/1/profesores
+
+En ese caso estaria obteniendo los profesores del deporte con idDeporte=1
